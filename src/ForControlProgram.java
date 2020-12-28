@@ -3,22 +3,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class StringBaiHai {
+public class ForControlProgram {
     public static String inputCo = "input_co.txt";
     public static String outputCo = "output_co.txt";
 
     public static void main(String[] args) {
         String[] days = {"20151106", "20151107", "20151108"};
         for (String day : days) {
-            String folderInputURL = "/home/dinhngocdinh/Downloads/String/input/";
+            String folderInputURL = "./String/input/";
             StringBuffer input = readFileByDate(folderInputURL, day);
-            String folderOutputURL = "/home/dinhngocdinh/Downloads/String/output/";
+            String folderOutputURL = "./String/output/";
             StringBuffer output = readFileByDate(folderOutputURL, day);
             System.out.println("Kiem tra ngay " + day);
-            StringBuffer soThueBaoInputCoOutputKhongCo = checkExistLeftInRight(input, output);
-            writeFile(inputCo, soThueBaoInputCoOutputKhongCo.toString());
-            StringBuffer soThueBaoOutputCoInPutKhongCo = checkExistLeftInRight(output, input);
-            writeFile(outputCo, soThueBaoOutputCoInPutKhongCo.toString());
+            String soThueBaoInputCoOutputKhongCo = checkExistLeftInRight(input, output).toString();
+            if (soThueBaoInputCoOutputKhongCo.equals("")){
+                System.out.println(" -- So thue bao ben input co thi ben output cung co");
+            }
+            else {
+                System.out.println(" -- So thue bao ben input co ma ben output khong co da duoc ghi vao file input_co.txt");
+                writeFile(inputCo, soThueBaoInputCoOutputKhongCo.toString());
+            }
+            String soThueBaoOutputCoInPutKhongCo = checkExistLeftInRight(output, input).toString();
+            if (soThueBaoOutputCoInPutKhongCo.equals("")){
+                System.out.println(" -- So thue bao ben output co thi ben input cung co");
+            }
+            else {
+                System.out.println(" -- So thue bao ben output co ma ben input khong co da duoc ghi vao file output_co.txt");
+                writeFile(outputCo, soThueBaoOutputCoInPutKhongCo.toString());
+            }
         }
     }
 
